@@ -14,12 +14,15 @@
       .group {
         padding: 0.15rem;
       }
-      .cost-breakdown-group {
-        display: flex;
-        flex-direction: column;
+      .row-cost {
+        align-items: center;
       }
-      .pair p {
-        display: inline;
+      table {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      td {
+        text-align: left;
       }
     </style>
   </head>
@@ -76,29 +79,27 @@
             </div>
           </div>
           <div class="cost-breakdown-group">
-            <div class="row">
-              <div class="pair">
-                <label for="car-rental-amount-paragraph">Car rental: </label>
-                <p id="car-rental-amount-paragraph"></p>
-              </div>
-              <div class="row">
-                <div class="pair">
-                  <label for="options-amount-paragraph">Options: </label>
-                  <p id="options-amount-paragraph"></p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="pair">
-                  <label for="under-25-amount-paragraph">Under 25 surcharge: </label>
-                  <p id="under-25-amount-paragraph"></p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="pair">
-                  <label for="total-due-amount-paragraph">Total due: </label>
-                  <p id="total-due-amount-paragraph"></p>
-                </div>
-              </div>
+            <div class="row-cost">
+              <table>
+                <tr>
+                  <td>Car rental:</td>
+                  <td id="car-rental-amount-paragraph"></td>
+                </tr>
+
+                <tr>
+                  <td>Options:</td>
+                  <td id="options-amount-paragraph"></td>
+                </tr>
+
+                <tr>
+                  <td>Under 25 surcharge:</td>
+                  <td id="under-25-amount-paragraph"></td>
+                </tr>
+                <tr>
+                  <td>Total due:</td>
+                  <td id="total-due-amount-paragraph"></td>
+                </tr>
+              </table>
             </div>
           </div>
         </fieldset>
