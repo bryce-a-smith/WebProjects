@@ -9,6 +9,8 @@ function init() {
   const coneRadio = document.getElementById("cone-radio");
   const cupRadio = document.getElementById("cup-radio");
   //toppings
+  const toggleSection = document.getElementById("toggle-section");
+  const toppingsSection = document.getElementById("toppings-section");
   const sprinklesCheckbox = document.getElementById("sprinkles-checkbox");
   const whippedCreamCheckbox = document.getElementById("whipped-cream-checkbox");
   const hotFudgeCheckbox = document.getElementById("hot-fudge-checkbox");
@@ -22,6 +24,16 @@ function init() {
   const totalDueAmount = document.getElementById("total-due-amount");
 
   //Write functions
+  function toggleToppingsSection() {
+    if (coneRadio.checked) {
+      toppingsSection.style.display = "none";
+    }
+
+    if (cupRadio.checked) {
+      toppingsSection.style.display = "block";
+    }
+  }
+
   function calculatePriceScoops(numOfScoops) {
     if (numOfScoops >= 1 && numOfScoops <= 4) {
       return 2.25 + (numOfScoops - 1) * 1.25;
@@ -33,20 +45,24 @@ function init() {
 
   function calculatePriceToppings() {
     let priceOfToppings = 0;
-    if (sprinklesCheckbox) {
-      priceOfToppings += 0.5;
-    }
-    if (whippedCreamCheckbox) {
-      priceOfToppings += 0.25;
-    }
-    if (hotFudgeCheckbox) {
-      priceOfToppings += 1.25;
-    }
-    if (cherryCheckbox) {
-      priceOfToppings += 0.25;
-    }
+    if (cupRadio.checked) {
+      if (sprinklesCheckbox.checked) {
+        priceOfToppings += 0.5;
+      }
+      if (whippedCreamCheckbox.checked) {
+        priceOfToppings += 0.25;
+      }
+      if (hotFudgeCheckbox.checked) {
+        priceOfToppings += 1.25;
+      }
+      if (cherryCheckbox.checked) {
+        priceOfToppings += 0.25;
+      }
 
-    return priceOfToppings;
+      return priceOfToppings;
+    } else {
+      return 0;
+    }
   }
 
   function displayCosts() {
@@ -60,7 +76,7 @@ function init() {
     const priceOfToppings = calculatePriceToppings();
 
     const priceBase = priceOfScoops + priceOfToppings;
-    const tax = priceBase + 0.07;
+    const tax = priceBase * 0.07;
 
     //display
     basePriceAmount.innerText = `$${priceBase.toFixed(2)}`;
@@ -69,6 +85,11 @@ function init() {
   }
 
   //Wire-up functions
+  //toggle toppings section
+  if (toggleSection) {
+    toggleSection.onclick = toggleToppingsSection;
+  }
+
   if (submitOrderButton) {
     submitOrderButton.onclick = displayCosts;
   }
