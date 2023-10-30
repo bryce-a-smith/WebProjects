@@ -22,19 +22,50 @@ function init() {
   const totalDueAmount = document.getElementById("total-due-amount");
 
   //Write functions
-  function calculatePriceScoops(numOfScoops) {}
+  function calculatePriceScoops(numOfScoops) {
+    if (numOfScoops >= 1 && numOfScoops <= 4) {
+      return 2.25 + (numOfScoops - 1) * 1.25;
+    } else {
+      alert("Please enter a number between 1 and 4");
+      return -1;
+    }
+  }
 
-  function calculatePriceToppings() {}
+  function calculatePriceToppings() {
+    let priceOfToppings = 0;
+    if (sprinklesCheckbox) {
+      priceOfToppings += 0.5;
+    }
+    if (whippedCreamCheckbox) {
+      priceOfToppings += 0.25;
+    }
+    if (hotFudgeCheckbox) {
+      priceOfToppings += 1.25;
+    }
+    if (cherryCheckbox) {
+      priceOfToppings += 0.25;
+    }
+
+    return priceOfToppings;
+  }
 
   function displayCosts() {
     const numberOfScoops = Number(numberOfScoopsInput.value);
-    const price = 2.25;
-    if (numberOfScoops >= 1 && numberOfScoops <= 4) {
-      price += (numberOfScoops - 1) * 1.25;
-    } else {
-      alert("Please enter a number between 1 and 4");
+
+    const priceOfScoops = calculatePriceScoops(numberOfScoops);
+    if (priceOfScoops == -1) {
       return;
     }
+
+    const priceOfToppings = calculatePriceToppings();
+
+    const priceBase = priceOfScoops + priceOfToppings;
+    const tax = priceBase + 0.07;
+
+    //display
+    basePriceAmount.innerText = `$${priceBase.toFixed(2)}`;
+    taxAmount.innerText = `$${tax.toFixed(2)}`;
+    totalDueAmount.innerText = `$${(priceBase + tax).toFixed(2)}`;
   }
 
   //Wire-up functions
