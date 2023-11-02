@@ -8,21 +8,41 @@ let teams = [
 ];
 
 function init() {
-    //get html elements into variables
-    const footballTeamsSelect = document.getElementById("football-teams-select");
+  //get html elements into variables
+  const footballTeamsSelect = document.getElementById("football-teams-select");
+  const displayInfoButton = document.getElementById("display-info-button");
+  const displayParagraph = document.getElementById("display-paragraph");
 
-    //write functions
-    function loadTeamsList() {
-        for(const team of teams) {
-            let option = new Option(team.name, team.code);
-            footballTeamsSelect.appendChild(option);
-        }
-
+  //write functions
+  function loadTeamsList() {
+    for (const team of teams) {
+      let option = new Option(team.name, team.code);
+      footballTeamsSelect.appendChild(option);
     }
+  }
 
-    loadTeamsList();
+  function getTeamByCode(code) {
+    for (const team of teams) {
+      if (team.code == code) {
+        return team;
+      }
+    }
+  }
 
+  function displayInfo(event) {
+    event.preventDefault();
+    //displayParagraph.innerText = "";
+    let selectedTeam = getTeamByCode(footballTeamsSelect.value);
+    console.log(selectedTeam); // Debug: Check the selected team object
+
+    displayParagraph.innerText = `You selected the ${selectedTeam.name} (${selectedTeam.code}) who play in ${selectedTeam.plays}`;
+  }
+
+  loadTeamsList();
+
+  if (displayInfoButton) {
+    displayInfoButton.onclick = displayInfo;
+  }
 }
-
 
 window.onload = init;
