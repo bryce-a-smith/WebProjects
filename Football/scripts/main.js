@@ -1,10 +1,10 @@
 "use strict";
 
 let teams = [
-  { code: "DAL", name: "Dallas Cowboys", plays: "Arlington, TX" },
-  { code: "DEN", name: "Denver Broncos", plays: "Denver, CO" },
-  { code: "HOU", name: "Houston Texans", plays: "Houston, TX" },
-  { code: "KAN", name: "Kansas City Chiefs", plays: "Kansas City, MO" },
+  { code: "DAL", name: "Dallas Cowboys", plays: "Arlington, TX", imgURL: "https://b.fssta.com/uploads/application/nfl/team-logos/Cowboys.png" },
+  { code: "DEN", name: "Denver Broncos", plays: "Denver, CO", imgURL: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/den.png" },
+  { code: "HOU", name: "Houston Texans", plays: "Houston, TX", imgURL: "https://a.espncdn.com/i/teamlogos/nfl/500/hou.png" },
+  { code: "KAN", name: "Kansas City Chiefs", plays: "Kansas City, MO", imgURL: "https://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/kc.png" },
 ];
 
 function init() {
@@ -12,6 +12,7 @@ function init() {
   const footballTeamsSelect = document.getElementById("football-teams-select");
   const displayInfoButton = document.getElementById("display-info-button");
   const displayParagraph = document.getElementById("display-paragraph");
+  const teamImage = document.getElementById("team-image");
 
   //write functions
   function loadTeamsList() {
@@ -22,10 +23,10 @@ function init() {
   }
 
   function onTeamSelectionChanged() {
-    if(footballTeamsSelect.value == "") {
-        displayParagraph.innerText = "";
+    if (footballTeamsSelect.value == "") {
+      displayParagraph.innerText = "";
+      teamImage.src = "";
     }
-
   }
 
   function getTeamByCode(code) {
@@ -42,6 +43,7 @@ function init() {
     console.log(selectedTeam); // Debug: Check the selected team object
 
     displayParagraph.innerText = `You selected the ${selectedTeam.name} (${selectedTeam.code}) who play in ${selectedTeam.plays}`;
+    teamImage.src = selectedTeam.imgURL;
     return false;
   }
 
