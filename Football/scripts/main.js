@@ -21,6 +21,13 @@ function init() {
     }
   }
 
+  function onTeamSelectionChanged() {
+    if(footballTeamsSelect.value == "") {
+        displayParagraph.innerText = "";
+    }
+
+  }
+
   function getTeamByCode(code) {
     for (const team of teams) {
       if (team.code == code) {
@@ -29,13 +36,13 @@ function init() {
     }
   }
 
-  function displayInfo(event) {
-    event.preventDefault();
-    //displayParagraph.innerText = "";
+  function displayInfo() {
+    displayParagraph.innerText = "";
     let selectedTeam = getTeamByCode(footballTeamsSelect.value);
     console.log(selectedTeam); // Debug: Check the selected team object
 
     displayParagraph.innerText = `You selected the ${selectedTeam.name} (${selectedTeam.code}) who play in ${selectedTeam.plays}`;
+    return false;
   }
 
   loadTeamsList();
@@ -43,6 +50,8 @@ function init() {
   if (displayInfoButton) {
     displayInfoButton.onclick = displayInfo;
   }
+
+  footballTeamsSelect.onchange = onTeamSelectionChanged;
 }
 
 window.onload = init;
